@@ -4,6 +4,9 @@
 % template ini dibuat oleh martin.manullang@if.itera.ac.id untuk dipergunakan oleh seluruh sivitas akademik itera.
 
 %%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE starts HERE %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{indentfirst}
+\usepackage{enumitem}
+\setlist{noitemsep}
 \usepackage{graphicx}
 \usepackage{caption}
 \captionsetup[table]{name=Tabel}
@@ -22,10 +25,11 @@
 \usepackage[left=2cm,right=2cm,top=3cm,bottom=2.5cm]{geometry}
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks,
+    colorlinks=true,
     linkcolor={red!50!black},
     citecolor={blue!50!black},
-    urlcolor={blue!80!black}
+    urlcolor={blue!80!black},
+    breaklinks=true
 }
 \usepackage{libertine}
 \usepackage{libertinust1math}
@@ -47,7 +51,7 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 \lstdefinestyle{mystyle}{
-	backgroundcolor=\color{backcolour},   
+    backgroundcolor=\color{backcolour},   
 	commentstyle=\color{green},
 	keywordstyle=\color{codegreen},
 	numberstyle=\tiny\color{codegray},
@@ -63,175 +67,146 @@
 	showstringspaces=false,
 	showtabs=false,                  
 	tabsize=2
-}
-\lstset{style=mystyle}
-\renewcommand{\lstlistingname}{Kode}
-%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE ends HERE %%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%% Data Diri %%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\stuid}{isi dengan NIM juga}
-\newcommand{\student}{\textbf{Isi Nama Di Sini (\stuid{})}}
-\newcommand{\course}{\textbf{Nama Mata Kuliah (Kode Mata Kuliah)}}
-\newcommand{\assignment}{\textbf{xxx}} % tugas ke...
-
-%%%%%%%%%%%%%%%%%%% using theorem style %%%%%%%%%%%%%%%%%%%%
-\newtheorem{thm}{Theorem}
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{defn}[thm]{Definition}
-\newtheorem{exa}[thm]{Example}
-\newtheorem{rem}[thm]{Remark}
-\newtheorem{coro}[thm]{Corollary}
-\newtheorem{quest}{Question}[section]
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{lipsum}%% a garbage package you don't need except to create examples.
-\usepackage{fancyhdr}
-\usepackage[ddmmyyyy]{datetime}
-\pagestyle{fancy}
-\lhead{Nama Mahasiswa di Header (Nim Mahasiswa di Header)}
-\rhead{ \thepage}
-\cfoot{\textbf{Judul Tugas diketik di sini}} % ini untuk judul tugas
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
-
-%%%%%%%%%%%%%%  Shortcut for usual set of numbers  %%%%%%%%%%%
-
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\setlength\headheight{14pt}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
-
-\begin{document}
-\thispagestyle{empty}
-\begin{center}
-	\includegraphics[scale = 0.15]{Figure/ifitera-header.png}
-	\vspace{0.1cm}
-\end{center}
-\noindent
-% change font family for header section only
-%{\fontfamily{LinuxLibertineT-OsF}\large\selectfont 
-{\large
-\rule{17cm}{0.2cm}\\[0.3cm]
-Nama: \student \hfill Tugas Ke: \assignment\\[0.1cm]
-Mata Kuliah: \course \hfill Tanggal: \today\\
-\rule{17cm}{0.05cm}
-\vspace{0.1cm}
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BODY DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Header Pertama}
-    Untuk menggunakan header, anda cukup membuat $\backslash${\tt{section}} pada bagian script anda. Penomoran pada header akan otomatis dibuat. Jika anda membutuhkan line break, anda dapat membubuhkan dua garis miring dengan backslash seperti berikut $\backslash\backslash$
-
-\section{Cara Mencantumkan Link}
-    Anda dapat memulai belajar menulis di \LaTeX dengan menulis tugas atau laporan yang sesungguhnya. Pada awalnya mungkin terasa sulit. Namun jika anda dengan tekun tetap berlatih, justru menulis di LaTeX akan membuat anda terbiasa dan malah lebih menyenangkan ketimbang menulis di Microsoft Word.\\
-    Jika anda ingin mencantumkan link di \LaTeX anda dapat melakukannya dengan perintah $\backslash${\tt{href}}, misalnya pada tautan berikut ini \href{http://aldi_tob_2000.staff.gunadarma.ac.id/Downloads/files/17359/Membuat+dokumen+dengan+latex.pdf}{(Sumber: PDF Tutorial Belajar Latex)}.
+    }
+    \lstset{style=mystyle}
+    \renewcommand{\lstlistingname}{Kode}
+    %%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE ends HERE %%%%%%%%%%%%%%%%%%%%%%%%
     
-\subsection{Sub Header atau Sub Chapter}
-     Untuk menggunakan subheader, anda cukup membuat $\backslash${\tt{subsection}} atau bahkan  $\backslash${\tt{subsubsection}} untuk sub-sub bab. Lalu bagaimana untuk membuat subheader atau bahkan header namun tanpa penomoran? Cek keterangan di bawah ini.
-
-\subsection*{Header Tanpa Penomoran}
-     Untuk menggunakan subheader tanpa penomoran, anda cukup membuat $\backslash${\tt{subsection*}} atau bahkan  $\backslash${\tt{subsubsection*}} maupun $\backslash${\tt{section*}}.
     
-\subsection{Bold, Italic, Plaintext}
-\begin{itemize}
-    \item Anda dapat membuat cetak tebal dengan perintah $\backslash${\tt{textbf}} seperti \textbf{berikut ini}.
-    \item Anda dapat membuat cetak miring dengan perintah $\backslash${\tt{textit}} seperti \textit{berikut ini}. \item Untuk menggaris bawahi, tinggal ketikkan perintah $\backslash${\tt{underline}} seperti \underline{berikut ini}.
-    \item Untuk membuat list seperti tulisan ini, gunakan perintah $\backslash${\tt{item}} diantara
-\end{itemize}
-
-\subsection{Code Snippets}
-    Berikut ini adalah contoh dari penggunaan $\backslash${\tt{begin{lstlisting}}} untuk menulis potongan kode. Dalam kasus ini saya menggunakan bahasa Python. Jika anda menggunakan C atau yang lainnya, tinggal sesuaikan di bagian parameter dari $\backslash${\tt{begin{lstlisting}}}. Anda dapat melihatnya pada code snipptes \ref{labelkode}
+    %%%%%%%%%%%%%%%%%%%%%%%%% Data Diri %%%%%%%%%%%%%%%%%%%%%%%%
+    \newcommand{\stuid}{121140XXX}
+    \newcommand{\student}{\textbf{Nama Mahasiswa (\stuid{})}}
+    \newcommand{\course}{\textbf{Metodologi Penelitian (IF25-41029)}}
+    \newcommand{\assignment}{\textbf{Proposal Awal}} % tugas ke...
     
-    \begin{lstlisting}[language=Python, caption=Captionnya tulis di sini class,label={labelkode}]
-    class SynthiaDataset(Dataset):
-
-    CLASSES = [
-        "void", "road", "sidewalk", "building", "wall", "fence", "pole", "traffic light", 
-        "traffic sign", "vegetation", "terrain", "sky", "person", "rider", "car", "truck", 
-        "bus", "train", "motorcycle", "bicycle", "road lines", "other", "road works"
-    ]
+    %%%%%%%%%%%%%%%%%%% using theorem style %%%%%%%%%%%%%%%%%%%%
+    \newtheorem{thm}{Theorem}
+    \newtheorem{lem}[thm]{Lemma}
+    \newtheorem{defn}[thm]{Definition}
+    \newtheorem{exa}[thm]{Example}
+    \newtheorem{rem}[thm]{Remark}
+    \newtheorem{coro}[thm]{Corollary}
+    \newtheorem{quest}{Question}[section]
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \usepackage{lipsum}%% a garbage package you don't need except to create examples.
+    \usepackage{fancyhdr}
+    \usepackage[ddmmyyyy]{datetime}
+    \pagestyle{fancy}
+    \lhead{Reyhan Capri Moraga (123140022)}
+    \rhead{\thepage}
+    \cfoot{\textbf{Perbandingan Efisiensi REST API dan GraphQL pada Sistem Penjadwalan Perkuliahan Berbasis Cloud-Native dengan Docker, Kubernetes, dan Load Balancing}} % ini untuk judul tugas
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
     
-    def __init__(self, path="../SYNTHIA-SF", classes=None, augmentation=None, preprocessing=None, valid=False):
-        self.rootdir = Path(path)
-        self.data_imgs, self.data_gts = self.prepare_data(valid,path)
-        self.valid = valid
-
+    %%%%%%%%%%%%%%  Shortcut for usual set of numbers  %%%%%%%%%%%
     
-        if classes == None:
-            classes = self.CLASSES 
-        self.class_values = [self.CLASSES.index(cls.lower()) for cls in classes]
+    \newcommand{\N}{\mathbb{N}}
+    \newcommand{\Z}{\mathbb{Z}}
+    \newcommand{\Q}{\mathbb{Q}}
+    \newcommand{\R}{\mathbb{R}}
+    \newcommand{\C}{\mathbb{C}}
+    \setlength\headheight{14pt}
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
+    \setlength{\parindent}{1cm}    % Set paragraph indentation
+    \setlength{\parskip}{6pt}      % Set spacing between paragraphs
+    
+    \begin{document}
+    \thispagestyle{empty}
+    
+    % Title page
+    \begin{center}
+        \includegraphics[scale = 0.15]{Figure/ifitera-header.png}
+        \vspace{1cm}
         
-        self.augmentation = augmentation
-        self.preprocessing = preprocessing
-    \end{lstlisting}
-
-\section{Memuat Multi-Gambar}
-Berikut ini adalah contoh cara untuk memuat multi-gambar.
-
-\begin{figure}[h]
-	\centering
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\def\svgwidth{\columnwidth}
-		\includegraphics[width=1\textwidth]{Figure/aug1.png}
-		\caption{Augment Result 1}
-		\label{fig:aug-1}
-	\end{subfigure}
-	\qquad %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-	%(or a blank line to force the subfigure onto a new line)
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\def\svgwidth{\columnwidth}
-		\includegraphics[width=1\textwidth]{Figure/aug2.png}
-		\caption{Augment Result 2}
-		\label{fig:aug-2}
-	\end{subfigure}
-	\caption{Augmentation Samples}\label{fig:aug}
-\end{figure}
-
+        \Large{\textbf{PROPOSAL PENELITIAN AWAL}}\\
+        \vspace{0.5cm}
+        \Large{\textbf{PERBANDINGAN EFISIENSI REST API DAN GRAPHQL PADA SISTEM PENJADWALAN PERKULIAHAN BERBASIS CLOUD-NATIVE DENGAN DOCKER, KUBERNETES, DAN LOAD BALANCING}}\\
+        \vspace{1cm}
+        
+        \normalsize
+        Tugas Mata Kuliah Metodologi Penelitian (IF25-41029)\\
+        Program Studi Teknik Informatika\\
+        Institut Teknologi Sumatera\\
+        \vspace{1cm}
+        
+    \includegraphics[scale=0.15]{Figure/Logo_ITERA.png}\\
+    \vspace{1cm}
+    
+    \large
+    Oleh:\\
+    \textbf{Reyhan Capri Moraga}\\
+    NIM: 123140022\\
+    \vspace{1cm}
+    
+    PROGRAM STUDI TEKNIK INFORMATIKA\\
+    INSTITUT TEKNOLOGI SUMATERA\\
+    2025
+\end{center}
 
 \newpage
-\section{Memuat Gambar}
-Jika anda tidak ingin memuat multi-gambar, alias satu caption hanya berisi satu gambar. Silahkan tiru cara berikut. Apabila anda merasa gambar anda tidak sesuai pada tempatnya, pelajari cara penempatan gambar pada \href{https://www.overleaf.com/learn/latex/Positioning_of_Figures}{tautan berikut ini}.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Figure/ioutrain.png}
-    \caption{Ini Captionnya}
-    \label{fig:my_label}
-\end{figure}
 
-\section{Memuat Tabel}
-Bagian ini adalah bagian yang menurut saya cukup sulit. Namun anda dapat menggunakan bantuan dari table designer yang ada di internet, misalnya \href{https://www.tablesgenerator.com}{TablesGenerator} atau \href{https://www.latex-tables.com}{Latex-Tables}. Ada juga plugin untuk microsoft excel bernama \href{https://ctan.org/tex-archive/support/excel2latex?lang=en}{CTAN}, namun saya jarang mempergunakannya. Contoh tabel dapat dilihat pada Tabel \ref{tab-contoh} berikut.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BODY DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pendahuluan}
 
-\begin{table}[h]
-\caption{Contoh Tabel}
-\label{tab-contoh}
-\centering
-\resizebox{12cm}{!}{%
-\begin{tabular}{ccccccccc}
-\hline
-\multirow{2}{*}{\textbf{Exp}} & \multirow{2}{*}{\textbf{Mask}} & \multicolumn{3}{c}{\textbf{GT}}            & \multicolumn{3}{c}{\textbf{Proposed}}      & \multirow{2}{*}{\textbf{RMSE}} \\ \cline{3-8}
-                              &                                & \textbf{Avg} & \textbf{Max} & \textbf{Min} & \textbf{Avg} & \textbf{Max} & \textbf{Min} &                                \\ \hline
-\multirow{2}{*}{1}            & Yes                            & 89.60        & 114.84        & 70.31        & 89.14        & 118.45        & 68.24        & 3.66                           \\
-                              & No                             & 90.55        & 112.50        & 75.00        & 89.03        & 109.75        & 71.35        & 3.60                            \\ \hline
-\multirow{2}{*}{2}            & Yes                            & 109.84        & 125.98       & 98.44       & 108.62       & 121.30       & 98.26      & 4.04                           \\ 
-                              & No                             & 106.62       & 123.44        & 96.09       & 106.48       & 122.19       & 93.37        & 3.95                           \\ \hline
-3                             & Yes                            & 74.42        & 94.92       & 62.99        & 73.49       & 102.32        & 60.43       & 3.27                         \\ \hline
-Mean                          &                                & 90.61         & 114.34        & 80.57        & 89.70       & 114.80       & 78.33        & 3.63                           \\ \hline
-\end{tabular}
-}
-\end{table}
+\subsection{Latar Belakang}
+Transformasi digital di sektor pendidikan tinggi telah mendorong peningkatan ekspektasi terhadap ketersediaan dan performa layanan akademik. Sistem informasi krusial, seperti sistem penjadalan perkuliahan, dituntut untuk tidak hanya fungsional tetapi juga harus skalabel dan responsif, terutama saat menghadapi lonjakan lalu lintas data (traffic) secara tiba-tiba, seperti pada masa pengisian Rencana Studi Mahasiswa (RSM)\cite{pratama2021}.
+    
+Untuk menjawab tantangan ini, arsitektur aplikasi modern telah beralih dari sistem monolitik menuju arsitektur cloud-native yang memanfaatkan teknologi seperti kontainerisasi (Docker) dan orkestrasi (Kubernetes) untuk mencapai skalabilitas elastis dan ketahanan sistem (resilience)\cite{wang2022}.
+    
+Inti dari sistem terdistribusi ini adalah Application Programming Interface (API), yang berfungsi sebagai jembatan komunikasi antar layanan. Selama bertahun-tahun, REST (Representational State Transfer) telah menjadi standar de-facto dalam perancangan API karena kesederhanaan dan adopsinya yang luas\cite{hartanto2021}. Namun, seiring dengan meningkatnya kompleksitas relasi data pada aplikasi modern—seperti sistem penjadalan yang melibatkan entitas mahasiswa, dosen, mata kuliah, dan ruangan—kelemahan REST mulai terlihat, terutama masalah over-fetching (mengambil data berlebih) dan under-fetching (memerlukan banyak request untuk mendapatkan data lengkap)\cite{cerny2021}.
+    
+Sebagai alternatif, GraphQL muncul sebagai query language untuk API yang menawarkan fleksibilitas tinggi, memungkinkan klien untuk meminta data yang spesifik hanya dengan satu request\cite{suryadi2022}. Sejumlah penelitian telah berupaya membandingkan efisiensi kedua arsitektur ini. Banyak studi awal, seperti yang dilakukan oleh Hartanto\cite{hartanto2021} dan Cerny and Donahoo\cite{cerny2021}, berfokus pada perbandingan performa dalam lingkungan aplikasi monolitik atau lingkungan pengujian lokal.
 
-\section{Referensi dan Daftar Pustaka}
-Ini bagian yang sedikit \textit{tricky}. Anda harus memasukkan daftar pustaka anda ke sebuah file berekstensi .bib di bagian kiri dari overleaf ini. Konten dot bib ini dapat anda export dengan mudah, entah itu dari google scholar, mendeley, ataupun manajemen sitasi lainnya.\\\\
-Cara penggunaanya pun cukup mudah. Misalnya saat ini saya ingin mensitasi salah satu dokumen yang ada, misalnya wikipedia, saya cukup menuliskan $\backslash${\tt{cite}} yang berisikan cite-key dari entri yang ada di file.bib \cite{Wikipedia_contributors2021-bb}. Contoh lain menuliskan sitasi adalah sebagai berikut \cite{Name2018-hd}.
+\subsection{Rumusan Masalah}
+Berdasarkan latar belakang yang telah diuraikan, rumusan masalah dalam penelitian ini adalah sebagai berikut:%
+\begin{enumerate}[nolistsep]
+    \item Bagaimana rancangan dan implementasi prototipe backend sistem penjadwal perkuliahan yang mengadopsi dua arsitektur API (REST dan GraphQL) di atas platform Docker dan Kubernetes?
+    \item Bagaimanakah perbandingan kinerja—ditinjau dari throughput, latency, ukuran payload, dan penggunaan resource (CPU/Memori)—antara REST API dan GraphQL dalam skenario akses data standar?
+    \item Bagaimana pengaruh skenario beban tinggi (high load) dan mekanisme load balancing pada platform Kubernetes terhadap performa dan skalabilitas masing-masing arsitektur API?
+\end{enumerate}
+
+\subsection{Tujuan Penelitian}
+\begin{enumerate}
+    \item Merancang dan mengimplementasikan prototipe backend sistem penjadwal perkuliahan dengan dua arsitektur API yang berbeda (REST dan GraphQL) menggunakan teknologi Docker dan Kubernetes dalam waktu 3 bulan.
+    \item Menganalisis dan membandingkan secara kuantitatif metrik efisiensi kedua API dengan target minimal 1000 request per second, latency di bawah 100ms, dan utilisasi CPU di bawah 80\%.
+    \item Mengevaluasi dan mendokumentasikan performa kedua arsitektur API dalam skenario beban tinggi (10.000 concurrent users) dengan target availability 99.9\%.
+\end{enumerate}
+
+\subsection{Batasan Masalah}
+\begin{itemize}
+    \item Penelitian berfokus pada perbandingan performa API di sisi backend. Aspek frontend (UI/UX) dari aplikasi penjadwal tidak akan dikembangkan atau dievaluasi.
+    \item Logika bisnis atau algoritma untuk generating jadwal perkuliahan berada di luar cakupan penelitian. Sistem menggunakan data jadwal yang sudah ada.
+    \item Pengujian dilakukan dalam lingkungan cluster Kubernetes yang terkontrol dengan 3-5 node.
+    \item Aspek keamanan API seperti otentikasi dan otorisasi tidak menjadi fokus utama pengukuran efisiensi.
+\end{itemize}
+
+\subsection{Kontribusi Penelitian}
+\begin{enumerate}
+    \item Kontribusi Akademik: Menyajikan data empiris perbandingan performa REST API vs. GraphQL dalam konteks arsitektur cloud-native, sebuah area yang masih terbatas di literatur saat ini.
+    \item Kontribusi Praktis: Memberikan rekomendasi berbasis data bagi pengembang dalam memilih arsitektur API untuk aplikasi berskala besar dengan karakteristik relasi data kompleks.
+    \item Artefak: Menghasilkan prototipe sistem dan dataset pengujian yang dapat direplikasi untuk penelitian lanjutan tentang optimasi API di lingkungan cloud-native.
+\end{enumerate}
 
 \newpage
 \bibliographystyle{IEEEtran}
 \bibliography{Referensi}
+
+% Add appendix for worksheet
+\appendix
+\section{Worksheet Tugas Proposal Awal}
+\label{sec:worksheet}
+
+\subsection{Catatan Review Platform AI}
+% Add review notes from AI platforms here
+
+\subsection{Catatan Review Teman Sejawat} 
+% Add peer review notes here
+
+\subsection{Changelog dan Perbaikan}
+% Add list of changes made based on reviews
+
+\subsection{Refleksi}
+% Add personal reflection on the process
+
 \end{document}

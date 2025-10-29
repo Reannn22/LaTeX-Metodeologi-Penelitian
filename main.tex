@@ -110,8 +110,26 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
     \setlength{\parindent}{1cm}    % Set paragraph indentation
     \setlength{\parskip}{6pt}      % Set spacing between paragraphs
-    
-    \begin{document}
+
+    \usepackage{titlesec}
+
+% Format for chapter titles (BAB)
+\titleformat{\section}
+{\normalfont\Large\bfseries\centering}
+{}{0pt}{\MakeUppercase}
+
+% Format for subsections
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{}{0pt}{\thesection.\arabic{subsection} }
+
+% Justify text
+\usepackage{ragged2e}
+\justifying
+
+\renewcommand{\refname}{DAFTAR PUSTAKA}
+
+\begin{document}
     \thispagestyle{empty}
     
     % Title page
@@ -147,7 +165,8 @@
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BODY DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Pendahuluan}
+\section{BAB I PENDAHULUAN}
+\addcontentsline{toc}{section}{BAB I PENDAHULUAN}
 
 \subsection{Latar Belakang}
 Transformasi digital di sektor pendidikan tinggi telah mendorong peningkatan ekspektasi terhadap ketersediaan dan performa layanan akademik. Sistem informasi krusial, seperti sistem penjadalan perkuliahan, dituntut untuk tidak hanya fungsional tetapi juga harus skalabel dan responsif, terutama saat menghadapi lonjakan lalu lintas data (traffic) secara tiba-tiba, seperti pada masa pengisian Rencana Studi Mahasiswa (RSM)\cite{pratama2021}.
@@ -174,12 +193,12 @@ Sebagai alternatif, GraphQL muncul sebagai query language untuk API yang menawar
 \end{enumerate}
 
 \subsection{Batasan Masalah}
-\begin{itemize}
+\begin{enumerate}[nolistsep]
     \item Penelitian berfokus pada perbandingan performa API di sisi backend. Aspek frontend (UI/UX) dari aplikasi penjadwal tidak akan dikembangkan atau dievaluasi.
     \item Logika bisnis atau algoritma untuk generating jadwal perkuliahan berada di luar cakupan penelitian. Sistem menggunakan data jadwal yang sudah ada.
     \item Pengujian dilakukan dalam lingkungan cluster Kubernetes yang terkontrol dengan 3-5 node.
     \item Aspek keamanan API seperti otentikasi dan otorisasi tidak menjadi fokus utama pengukuran efisiensi.
-\end{itemize}
+\end{enumerate}
 
 \subsection{Kontribusi Penelitian}
 \begin{enumerate}
@@ -191,22 +210,4 @@ Sebagai alternatif, GraphQL muncul sebagai query language untuk API yang menawar
 \newpage
 \bibliographystyle{IEEEtran}
 \bibliography{Referensi}
-
-% Add appendix for worksheet
-\appendix
-\section{Worksheet Tugas Proposal Awal}
-\label{sec:worksheet}
-
-\subsection{Catatan Review Platform AI}
-% Add review notes from AI platforms here
-
-\subsection{Catatan Review Teman Sejawat} 
-% Add peer review notes here
-
-\subsection{Changelog dan Perbaikan}
-% Add list of changes made based on reviews
-
-\subsection{Refleksi}
-% Add personal reflection on the process
-
 \end{document}

@@ -1,213 +1,218 @@
+% ===================================================================
+% MAIN.TEX - Proposal Penelitian Tugas Akhir
+% Program Studi Teknik Informatika - Institut Teknologi Sumatera
+% ===================================================================
+
 \documentclass[11pt,a4paper]{article}
-%%%%%%%%%%%%%%%%%%%%%%%%% Credit %%%%%%%%%%%%%%%%%%%%%%%%
 
-% template ini dibuat oleh martin.manullang@if.itera.ac.id untuk dipergunakan oleh seluruh sivitas akademik itera.
+% ===================================================================
+% PACKAGE CONFIGURATION
+% ===================================================================
 
-%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE starts HERE %%%%%%%%%%%%%%%%%%%%%%%%
+% Margin dan Geometri
+\usepackage[a4paper, top=3cm, bottom=3cm, left=4cm, right=3cm]{geometry}
 \usepackage{indentfirst}
+
+% Font dan Bahasa
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+
+% Spasi
+\usepackage{setspace}
+\onehalfspacing
+
+% Package Tambahan
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{enumitem}
-\setlist{noitemsep}
-\usepackage{graphicx}
-\usepackage{caption}
-\captionsetup[table]{name=Tabel}
-\captionsetup[figure]{name=Gambar}
-\usepackage{tabulary}
-% \usepackage{amsmath}
-\usepackage{fancyhdr}
-% \usepackage{amssymb}
-% \usepackage{amsthm}
-\usepackage{placeins}
-% \usepackage{amsfonts}
-\usepackage{graphicx}
-\usepackage[all]{xy}
+\usepackage{nameref}
 \usepackage{tikz}
-\usepackage{verbatim}
-\usepackage[left=2cm,right=2cm,top=3cm,bottom=2.5cm]{geometry}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor={red!50!black},
-    citecolor={blue!50!black},
-    urlcolor={blue!80!black},
-    breaklinks=true
-}
-\usepackage{libertine}
-\usepackage{libertinust1math}
-\usepackage[T1]{fontenc}
-\usepackage{inconsolata}
-
-\usepackage{caption}
-\usepackage{subcaption}
 \usepackage{multirow}
-\usepackage{psfrag}
-\usepackage[T1]{fontenc}
-\usepackage[scaled]{beramono}
-% Enable inserting code into the document
-\usepackage{listings}
-\usepackage{xcolor} 
-% custom color & style for listing
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-	commentstyle=\color{green},
-	keywordstyle=\color{codegreen},
-	numberstyle=\tiny\color{codegray},
-	stringstyle=\color{codepurple},
-	basicstyle=\ttfamily\footnotesize,
-	breakatwhitespace=false,         
-	breaklines=true,                 
-	captionpos=b,                    
-	keepspaces=true,                 
-	numbers=left,                    
-	numbersep=5pt,                  
-	showspaces=false,                
-	showstringspaces=false,
-	showtabs=false,                  
-	tabsize=2
-    }
-    \lstset{style=mystyle}
-    \renewcommand{\lstlistingname}{Kode}
-    %%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE ends HERE %%%%%%%%%%%%%%%%%%%%%%%%
-    
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%% Data Diri %%%%%%%%%%%%%%%%%%%%%%%%
-    \newcommand{\stuid}{121140XXX}
-    \newcommand{\student}{\textbf{Nama Mahasiswa (\stuid{})}}
-    \newcommand{\course}{\textbf{Metodologi Penelitian (IF25-41029)}}
-    \newcommand{\assignment}{\textbf{Proposal Awal}} % tugas ke...
-    
-    %%%%%%%%%%%%%%%%%%% using theorem style %%%%%%%%%%%%%%%%%%%%
-    \newtheorem{thm}{Theorem}
-    \newtheorem{lem}[thm]{Lemma}
-    \newtheorem{defn}[thm]{Definition}
-    \newtheorem{exa}[thm]{Example}
-    \newtheorem{rem}[thm]{Remark}
-    \newtheorem{coro}[thm]{Corollary}
-    \newtheorem{quest}{Question}[section]
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \usepackage{lipsum}%% a garbage package you don't need except to create examples.
-    \usepackage{fancyhdr}
-    \usepackage[ddmmyyyy]{datetime}
-    \pagestyle{fancy}
-    \lhead{Reyhan Capri Moraga (123140022)}
-    \rhead{\thepage}
-    \cfoot{\textbf{Perbandingan Efisiensi REST API dan GraphQL pada Sistem Penjadwalan Perkuliahan Berbasis Cloud-Native dengan Docker, Kubernetes, dan Load Balancing}} % ini untuk judul tugas
-    \renewcommand{\headrulewidth}{0.4pt}
-    \renewcommand{\footrulewidth}{0.4pt}
-    
-    %%%%%%%%%%%%%%  Shortcut for usual set of numbers  %%%%%%%%%%%
-    
-    \newcommand{\N}{\mathbb{N}}
-    \newcommand{\Z}{\mathbb{Z}}
-    \newcommand{\Q}{\mathbb{Q}}
-    \newcommand{\R}{\mathbb{R}}
-    \newcommand{\C}{\mathbb{C}}
-    \setlength\headheight{14pt}
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
-    \setlength{\parindent}{1cm}    % Set paragraph indentation
-    \setlength{\parskip}{6pt}      % Set spacing between paragraphs
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{comment}
+\usepackage{float}
 
-    \usepackage{titlesec}
+% === TAMBAHKAN 3 BARIS INI ===
+\usepackage{tocloft}
+\setlength{\cftsecnumwidth}{0pt}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+% ==============================
 
-% Format for chapter titles (BAB)
+% Header dan Footer setup
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Reyhan Capri Moraga (123140022)}
+\rhead{\thepage}
+\cfoot{\textbf{Perbandingan Efisiensi REST API dan GraphQL pada Sistem Penjadwalan Perkuliahan Berbasis Cloud-Native dengan Docker, Kubernetes, dan Load Balancing}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Section formatting
+\usepackage{titlesec}
 \titleformat{\section}
 {\normalfont\Large\bfseries\centering}
 {}{0pt}{\MakeUppercase}
 
-% Format for subsections
+% --- TAMBAHKAN DUA BARIS INI ---
+\titleformat{name=\section,numberless}
+{\normalfont\Large\bfseries\centering}
+{}{0pt}{\MakeUppercase}
+% ---------------------------------
+
 \titleformat{\subsection}
 {\normalfont\large\bfseries}
-{}{0pt}{\thesection.\arabic{subsection} }
+{}{0pt}{\thesection.\arabic{subsection} \space}
 
-% Justify text
-\usepackage{ragged2e}
-\justifying
+% Spacing between paragraphs
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{1em}
 
-\renewcommand{\refname}{DAFTAR PUSTAKA}
+% Hyperref (HARUS TERAKHIR)
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=black,
+    urlcolor=blue,
+}
+
+% ===================================================================
+% INFORMASI DOKUMEN
+% ===================================================================
+
+\newcommand{\thetitle}{PERBANDINGAN EFISIENSI REST API DAN GRAPHQL PADA SISTEM PENJADWALAN PERKULIAHAN BERBASIS CLOUD-NATIVE DENGAN DOCKER, KUBERNETES, DAN LOAD BALANCING}
+
+\newcommand{\theauthor}{Reyhan Capri Moraga}
+\newcommand{\printnim}{123140022}
+
+% Format tanggal Indonesia
+\newcommand{\todayIndo}{\number\day\space\ifcase\month\or
+Januari\or Februari\or Maret\or April\or Mei\or Juni\or
+Juli\or Agustus\or September\or Oktober\or November\or Desember\fi
+\space\number\year}
 
 \begin{document}
-    \thispagestyle{empty}
+\thispagestyle{empty}
+
+% ===================================================================
+% COVER
+% ===================================================================
+
+\begin{center}
+    \smallskip
     
-    % Title page
     \begin{center}
-        \includegraphics[scale = 0.15]{Figure/ifitera-header.png}
-        \vspace{1cm}
-        
-        \Large{\textbf{PROPOSAL PENELITIAN AWAL}}\\
-        \vspace{0.5cm}
-        \Large{\textbf{PERBANDINGAN EFISIENSI REST API DAN GRAPHQL PADA SISTEM PENJADWALAN PERKULIAHAN BERBASIS CLOUD-NATIVE DENGAN DOCKER, KUBERNETES, DAN LOAD BALANCING}}\\
-        \vspace{1cm}
-        
-        \normalsize
-        Tugas Mata Kuliah Metodologi Penelitian (IF25-41029)\\
+        \fontsize{11pt}{11pt}
+        \bfseries \MakeUppercase{\thetitle}
+        \vfill
+        \uppercase{PROPOSAL PENELITIAN AWAL}
+        \vfill
+        \normalfont Tugas Mata Kuliah Metodologi Penelitian (IF25-41029)\\
         Program Studi Teknik Informatika\\
-        Institut Teknologi Sumatera\\
-        \vspace{1cm}
-        
-    \includegraphics[scale=0.15]{Figure/Logo_ITERA.png}\\
-    \vspace{1cm}
+        Institut Teknologi Sumatera
+        \vfill
+    \end{center}
+
+    \large \bfseries Oleh:\\
+    \large \bfseries \theauthor\\
+    \printnim
+    \vfill
     
-    \large
-    Oleh:\\
-    \textbf{Reyhan Capri Moraga}\\
-    NIM: 123140022\\
-    \vspace{1cm}
-    
-    PROGRAM STUDI TEKNIK INFORMATIKA\\
-    INSTITUT TEKNOLOGI SUMATERA\\
-    2025
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=3cm]{Figure/Logo_ITERA.png}
+    \end{figure}
+    \vfill
+
+    \begin{center}
+        \fontsize{11pt}{11pt}
+        \bfseries
+        \uppercase{
+            Program Studi Teknik Informatika\\
+            Institut Teknologi Sumatera\\
+            2025
+        }
+    \end{center}
 \end{center}
+
+% =========================
+% DAFTAR ISI (Halaman 2)
+% =========================
+\newpage
+\thispagestyle{empty}
+
+\section*{\centering \MakeUppercase{DAFTAR ISI}}
+\addcontentsline{toc}{section}{DAFTAR ISI}
+
+\vspace{1em}
+
+% Hilangkan judul default dari \tableofcontents
+\begingroup
+\renewcommand{\contentsname}{}
+\tableofcontents
+\endgroup
 
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BODY DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{BAB I PENDAHULUAN}
-\addcontentsline{toc}{section}{BAB I PENDAHULUAN}
+\section[BAB I PENDAHULUAN]{BAB I \protect\\ PENDAHULUAN}
 
 \subsection{Latar Belakang}
-Transformasi digital di sektor pendidikan tinggi telah mendorong peningkatan ekspektasi terhadap ketersediaan dan performa layanan akademik. Sistem informasi krusial, seperti sistem penjadalan perkuliahan, dituntut untuk tidak hanya fungsional tetapi juga harus skalabel dan responsif, terutama saat menghadapi lonjakan lalu lintas data (traffic) secara tiba-tiba, seperti pada masa pengisian Rencana Studi Mahasiswa (RSM)\cite{pratama2021}.
-    
-Untuk menjawab tantangan ini, arsitektur aplikasi modern telah beralih dari sistem monolitik menuju arsitektur cloud-native yang memanfaatkan teknologi seperti kontainerisasi (Docker) dan orkestrasi (Kubernetes) untuk mencapai skalabilitas elastis dan ketahanan sistem (resilience)\cite{wang2022}.
-    
-Inti dari sistem terdistribusi ini adalah Application Programming Interface (API), yang berfungsi sebagai jembatan komunikasi antar layanan. Selama bertahun-tahun, REST (Representational State Transfer) telah menjadi standar de-facto dalam perancangan API karena kesederhanaan dan adopsinya yang luas\cite{hartanto2021}. Namun, seiring dengan meningkatnya kompleksitas relasi data pada aplikasi modern—seperti sistem penjadalan yang melibatkan entitas mahasiswa, dosen, mata kuliah, dan ruangan—kelemahan REST mulai terlihat, terutama masalah over-fetching (mengambil data berlebih) dan under-fetching (memerlukan banyak request untuk mendapatkan data lengkap)\cite{cerny2021}.
-    
-Sebagai alternatif, GraphQL muncul sebagai query language untuk API yang menawarkan fleksibilitas tinggi, memungkinkan klien untuk meminta data yang spesifik hanya dengan satu request\cite{suryadi2022}. Sejumlah penelitian telah berupaya membandingkan efisiensi kedua arsitektur ini. Banyak studi awal, seperti yang dilakukan oleh Hartanto\cite{hartanto2021} dan Cerny and Donahoo\cite{cerny2021}, berfokus pada perbandingan performa dalam lingkungan aplikasi monolitik atau lingkungan pengujian lokal.
+Transformasi digital di sektor pendidikan tinggi telah mendorong peningkatan ekspektasi terhadap ketersediaan dan performa layanan akademik. Sistem informasi krusial, seperti sistem penjadalan perkuliahan, dituntut untuk tidak hanya fungsional tetapi juga harus skalabel dan responsif, terutama saat menghadapi lonjakan lalu lintas data (traffic) secara tiba-tiba, seperti pada masa pengisian Rencana Studi Mahasiswa (RSM) \cite{pratama2021}. Untuk menjawab tantangan ini, arsitektur aplikasi modern telah beralih dari sistem monolitik menuju arsitektur cloud-native yang memanfaatkan teknologi seperti kontainerisasi (Docker) dan orkestrasi (Kubernetes) untuk mencapai skalabilitas elastis dan ketahanan sistem (resilience) \cite{wang2022}. Dalam arsitektur ini, mekanisme load balancing menjadi krusial untuk mendistribusikan lalu lintas data secara merata ke berbagai copy layanan (kontainer), memastikan tidak ada satu layanan pun yang kelebihan beban dan meningkatkan ketersediaan layanan \cite{sharma2021}.
+
+Inti dari sistem terdistribusi ini adalah Application Programming Interface (API), yang berfungsi sebagai jembatan komunikasi antar layanan. Selama bertahun-tahun, REST (Representational State Transfer) telah menjadi standar de-facto dalam perancangan API karena kesederhanaan dan adopsinya yang luas \cite{hartanto2021}. Namun, seiring dengan meningkatnya kompleksitas relasi data pada aplikasi modern—seperti sistem penjadalan yang melibatkan entitas mahasiswa, dosen, mata kuliah, dan ruangan—kelemahan REST mulai terlihat, terutama masalah over-fetching (mengambil data berlebih) dan under-fetching (memerlukan banyak request untuk mendapatkan data lengkap) \cite{cerny2021}.
+
+Sebagai alternatif, GraphQL muncul sebagai query language untuk API yang menawarkan fleksibilitas tinggi, memungkinkan klien untuk meminta data yang spesifik hanya dengan satu request \cite{suryadi2022}. Sejumlah penelitian telah berupaya membandingkan efisiensi kedua arsitektur ini. Banyak studi awal, seperti yang dilakukan oleh Hartanto \cite{hartanto2021} dan Cerny \& Donahoo \cite{cerny2021}, berfokus pada perbandingan performa dalam lingkungan aplikasi monolitik atau lingkungan pengujian lokal. Studi-Sistem-studi ini umumnya menemukan bahwa GraphQL unggul dalam mengurangi ukuran payload dan waktu respons untuk query yang kompleks.
+
+Meskipun demikian, terdapat celah penelitian (research gap) yang signifikan. Sangat sedikit penelitian yang mengevaluasi kedua arsitektur API ini dalam konteks cloud-native yang sesungguhnya \cite{wang2022, suryadi2022}. Kinerja di lingkungan laboratorium (monolitik) mengabaikan variabel dinamis produksi seperti overhead latensi keamanan (misal, validasi token) \cite{wibowo2021}, latensi jaringan antar-layanan, service discovery, dan dampak langsung dari algoritma load balancing Kubernetes terhadap distribusi beban. Perbandingan yang adil (fair comparison) di lingkungan yang lebih realistis ini masih sangat dibutuhkan.
+
+Oleh karena itu, penelitian ini akan melakukan analisis perbandingan efisiensi REST API dan GraphQL pada studi kasus sistem penjadalan perkuliahan, yang diimplementasikan sebagai testbed yang adil di atas platform cloud-native (Docker, Kubernetes) dan diuji menggunakan skenario load balancing untuk mensimulasikan beban kerja dunia nyata.
 
 \subsection{Rumusan Masalah}
 
 \begin{enumerate}[nolistsep]
-    \item Bagaimana rancangan dan implementasi prototipe backend sistem penjadwal perkuliahan yang mengadopsi dua arsitektur API (REST dan GraphQL) di atas platform Docker dan Kubernetes?
-    \item Bagaimanakah perbandingan kinerja—ditinjau dari throughput, latency, ukuran payload, dan penggunaan resource (CPU/Memori)—antara REST API dan GraphQL dalam skenario akses data standar?
-    \item Bagaimana pengaruh skenario beban tinggi (high load) dan mekanisme load balancing pada platform Kubernetes terhadap performa dan skalabilitas masing-masing arsitektur API?
+    \item Bagaimana merancang sebuah testbed perbandingan yang adil (fair comparison) untuk prototipe backend REST dan GraphQL, yang mencakup simulasi overhead latensi keamanan (mock middleware), di atas platform Docker dan Kubernetes?
+    \item Seberapa signifikankah perbedaan kinerja (ditinjau dari throughput, latency, dan payload size) antara REST dan GraphQL saat diuji dengan skenario query yang bervariasi: (a) query sederhana (data tunggal), (b) query kompleks (relasi data majemuk), dan (c) simulasi under-fetching REST?
+    \item Manakah arsitektur API yang menunjukkan skalabilitas dan ketahanan (resilience) lebih baik ketika dihadapkan pada skenario beban tinggi (high load) yang didistribusikan melalui load balancer Kubernetes?
 \end{enumerate}
 
 \subsection{Tujuan Penelitian}
-\begin{enumerate}
-    \item Merancang dan mengimplementasikan prototipe backend sistem penjadwal perkuliahan dengan dua arsitektur API yang berbeda (REST dan GraphQL) menggunakan teknologi Docker dan Kubernetes dalam waktu 3 bulan.
-    \item Menganalisis dan membandingkan secara kuantitatif metrik efisiensi kedua API dengan target minimal 1000 request per second, latency di bawah 100ms, dan utilisasi CPU di bawah 80\%.
-    \item Mengevaluasi dan mendokumentasikan performa kedua arsitektur API dalam skenario beban tinggi (10.000 concurrent users) dengan target availability 99.9\%.
+
+\begin{enumerate}[nolistsep]
+    \item Merancang dan mengimplementasikan prototipe backend sistem penjadwal (REST dan GraphQL) dengan jaminan fairness—termasuk implementasi mock middleware latensi—dan menjalankannya sebagai testbed di atas platform Docker dan Kubernetes.
+    \item Menganalisis secara kuantitatif perbedaan kinerja kedua API pada tiga skenario query spesifik (sederhana, kompleks, dan simulasi under-fetching) untuk metrik throughput, latency, dan payload size.
+    \item Mengevaluasi dan menentukan arsitektur API yang memiliki skalabilitas dan ketahanan (resilience) superior di bawah skenario pengujian beban tinggi (stress testing) dengan load balancing.
 \end{enumerate}
 
 \subsection{Batasan Masalah}
+
 \begin{enumerate}[nolistsep]
     \item Penelitian berfokus pada perbandingan performa API di sisi backend. Aspek frontend (UI/UX) dari aplikasi penjadwal tidak akan dikembangkan atau dievaluasi.
-    \item Logika bisnis atau algoritma untuk generating jadwal perkuliahan berada di luar cakupan penelitian. Sistem menggunakan data jadwal yang sudah ada.
-    \item Pengujian dilakukan dalam lingkungan cluster Kubernetes yang terkontrol dengan 3-5 node.
-    \item Aspek keamanan API seperti otentikasi dan otorisasi tidak menjadi fokus utama pengukuran efisiensi.
+    \item Logika bisnis atau algoritma untuk generating jadwal perkuliahan (misalnya, penyelesaian konflik jadwal) berada di luar cakupan penelitian. Sistem dianggap sudah memiliki data jadwal yang siap diakses melalui API.
+    \item Pengujian dilakukan dalam lingkungan cluster Kubernetes yang terkontrol. Variabel spesifik dari penyedia layanan cloud publik (seperti AWS, GCP, atau Azure) tidak akan dibahas secara mendalam.
+    \item Penelitian ini tidak mengimplementasikan sistem keamanan (otentikasi/otorisasi) secara fungsional. Namun, sebuah mock middleware yang mensimulasikan overhead latensi konstan (misal: 1-2ms untuk validasi token) akan ditambahkan pada kedua API untuk menjamin fairness perbandingan yang lebih mendekati kondisi nyata.
+    \item Penelitian tidak berfokus pada optimasi query di database layer. Kinerja basis data diasumsikan setara dan konstan untuk kedua API, yang akan menggunakan skema dan query data mentah yang serupa.
+    \item Upaya fairness dilakukan pada logika bisnis, namun perbedaan performa minor yang berasal dari library atau framework-specific (misal: ORM, GraphQL resolver) merupakan batasan yang diketahui.
 \end{enumerate}
 
 \subsection{Kontribusi Penelitian}
-\begin{enumerate}
-    \item Kontribusi Akademik: Menyajikan data empiris perbandingan performa REST API vs. GraphQL dalam konteks arsitektur cloud-native, sebuah area yang masih terbatas di literatur saat ini.
-    \item Kontribusi Praktis: Memberikan rekomendasi berbasis data bagi pengembang dalam memilih arsitektur API untuk aplikasi berskala besar dengan karakteristik relasi data kompleks.
-    \item Artefak: Menghasilkan prototipe sistem dan dataset pengujian yang dapat direplikasi untuk penelitian lanjutan tentang optimasi API di lingkungan cloud-native.
+
+\begin{enumerate}[nosep]
+    \item Menyajikan data empiris dan analisis baru mengenai perbandingan performa REST API vs. GraphQL dalam konteks arsitektur cloud-native melalui sebuah testbed perbandingan yang adil (fair comparison) dan lebih mendekati skenario nyata (memasukkan simulasi overhead latensi dan load balancing).
+    \item Memberikan rekomendasi berbasis data bagi para arsitek sistem dalam memilih arsitektur API yang paling efisien untuk aplikasi berskala besar, khususnya yang memiliki karakteristik relasi data kompleks dan pola lalu lintas spiky (padat pada waktu-waktu tertentu).
+    \item Menghasilkan blueprint dan prototipe sistem sebagai testbed yang dapat direplikasi untuk penelitian lebih lanjut mengenai optimasi performa API di lingkungan cloud-native.
 \end{enumerate}
 
+
 \newpage
+
+\renewcommand{\refname}{DAFTAR PUSTAKA}
 \bibliographystyle{IEEEtran}
 \bibliography{Referensi}
+
 \end{document}

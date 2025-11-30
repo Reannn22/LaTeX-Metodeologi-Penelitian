@@ -208,6 +208,88 @@ Oleh karena itu, penelitian ini akan melakukan analisis perbandingan efisiensi R
     \item Menghasilkan blueprint dan prototipe sistem sebagai testbed yang dapat direplikasi untuk penelitian lebih lanjut mengenai optimasi performa API di lingkungan cloud-native.
 \end{enumerate}
 
+\newpage
+
+\section{BAB 2. TINJAUAN PUSTAKA}
+
+\subsection{Arsitektur Cloud-Native dan Microservices}
+Transformasi arsitektur perangkat lunak telah bergeser secara signifikan dari model monolitik menuju microservices. Dalam konteks cloud-native, aplikasi dibangun sebagai sekumpulan layanan kecil yang independen dan terisolasi dalam kontainer (seperti Docker). Wang dan Li (2022) menjelaskan bahwa arsitektur ini menawarkan skalabilitas elastis dan fault isolation yang lebih baik dibandingkan monolitik. Namun, pergeseran ini memperkenalkan kompleksitas baru dalam komunikasi antar-layanan, di mana efisiensi pertukaran data melalui Application Programming Interface (API) menjadi faktor kritis yang menentukan performa sistem secara keseluruhan. Orkestrasi menggunakan Kubernetes menjadi standar industri untuk mengelola lifecycle kontainer ini, termasuk fitur auto-scaling dan self-healing.
+
+\subsection{Perbandingan Arsitektur API: REST vs GraphQL}
+
+\subsubsection{REST (Representational State Transfer)}
+REST telah menjadi standar de-facto untuk desain API selama bertahun-tahun. Karakteristik utamanya adalah statelessness dan penggunaan metode HTTP standar (GET, POST, PUT, DELETE) untuk memanipulasi sumber daya. Kelebihan REST terletak pada kesederhanaannya dan kemampuan caching yang baik pada level HTTP. Namun, Cerny dan Donahoo (2021) menyoroti kelemahan fundamental REST dalam aplikasi data-sentris yang kompleks, yaitu masalah over-fetching (klien menerima data lebih banyak dari yang dibutuhkan) dan under-fetching (klien memerlukan beberapa request ke endpoint berbeda untuk mendapatkan data relasional).
+
+\subsubsection{GraphQL}
+Sebagai respon terhadap keterbatasan REST, Facebook memperkenalkan GraphQL, sebuah query language untuk API. Berbeda dengan REST yang memiliki banyak endpoint, GraphQL mengekspos satu endpoint tunggal yang memungkinkan klien mendefinisikan struktur data persis yang dibutuhkan. Suryadi (2022) dalam studinya menemukan bahwa GraphQL secara signifikan mengurangi ukuran payload data pada aplikasi mobile, yang berimplikasi langsung pada efisiensi bandwidth. Fitur schema-first design pada GraphQL juga memudahkan evolusi API tanpa merusak kompatibilitas dengan klien lama.
+
+\subsection{Mekanisme Load Balancing pada Kubernetes}
+Dalam lingkungan Kubernetes, load balancing berfungsi mendistribusikan lalu lintas jaringan ke berbagai pod (replika layanan) untuk menjamin ketersediaan dan responsivitas. Sharma dan Gupta (2021) menganalisis berbagai algoritma load balancing (seperti Round Robin dan Least Connection) dan menyimpulkan bahwa efisiensi distribusi beban sangat dipengaruhi oleh karakteristik request. Pada konteks perbandingan API, cara load balancer (seperti Nginx Ingress atau Service tipe LoadBalancer) menangani request HTTP (REST) versus payload POST tunggal (GraphQL) dapat mempengaruhi latensi total sistem, sebuah aspek yang jarang dibahas dalam studi komparasi API tradisional.
+
+\subsection{State of the Art dan Research Gap}
+Terdapat sejumlah penelitian yang membandingkan performa REST dan GraphQL. Hartanto (2021) melakukan perbandingan pada aplikasi e-commerce monolitik dan menemukan GraphQL lebih unggul dalam fleksibilitas data. Studi lain oleh Wang dan Li (2022) mulai menyentuh aspek microservices, namun pengujian dilakukan pada lingkungan lokal tanpa orkestrasi yang kompleks.
+
+Kelemahan utama dari literatur yang ada adalah mayoritas pengujian dilakukan dalam lingkungan yang terisolasi atau monolitik, mengabaikan variabel dinamis yang ada pada lingkungan produksi cloud-native modern. Variabel seperti overhead jaringan antar-pod dalam klaster Kubernetes, latensi yang diperkenalkan oleh ingress controller atau load balancer, serta dampak keamanan (validasi token pada middleware) seringkali tidak diperhitungkan.
+
+Research Gap: Belum ada studi komprehensif yang membandingkan efisiensi REST API dan GraphQL secara head-to-head dalam skenario "dunia nyata" yang melibatkan arsitektur cloud-native penuh dengan Kubernetes, load balancing, dan simulasi latensi keamanan. Penelitian ini hadir untuk mengisi celah tersebut dengan merancang testbed yang adil (fair comparison) untuk mengukur dampak arsitektur API terhadap performa sistem berskala besar.
+
+\newpage
+
+\section{BAB 3. METODOLOGI PENELITIAN}
+
+\subsection{Kerangka Penelitian}
+Penelitian ini akan dilaksanakan mengikuti alur kerja sistematis untuk menjamin validitas hasil eksperimen. Kerangka penelitian digambarkan dalam tahapan berikut:
+
+\begin{enumerate}
+    \item \textbf{Studi Literatur:} Memperdalam pemahaman tentang REST, GraphQL, Docker, Kubernetes, dan metrik evaluasi kinerja.
+    \item \textbf{Perancangan Sistem (Design):} Merancang arsitektur microservices untuk sistem penjadwalan kuliah, skema basis data, dan spesifikasi API (OpenAPI untuk REST dan Schema GraphQL).
+    \item \textbf{Implementasi Testbed:} Membangun lingkungan pengujian yang terdiri dari klaster Kubernetes, konfigurasi load balancer, dan pengembangan layanan backend (dua versi: REST dan GraphQL) beserta mock middleware keamanan.
+    \item \textbf{Pengujian \& Pengumpulan Data:} Menjalankan skenario uji beban (load testing) menggunakan alat bantu otomatisasi untuk mengukur metrik kinerja.
+    \item \textbf{Analisis Hasil:} Membandingkan data yang diperoleh secara statistik untuk menjawab rumusan masalah.
+    \item \textbf{Penarikan Kesimpulan:} Menyimpulkan arsitektur mana yang lebih efisien berdasarkan bukti empiris.
+\end{enumerate}
+
+\subsection{Metode Perancangan dan Pengembangan}
+Sistem yang dikembangkan bukanlah aplikasi produksi penuh, melainkan sebuah Prototipe Testbed yang dirancang khusus untuk memfasilitasi perbandingan yang adil (fair comparison).
+
+\textbf{Arsitektur Sistem:} Menggunakan pola microservices sederhana yang dijalankan di atas Docker container dan diorkestrasi oleh Kubernetes (Minikube atau K3s).
+
+\textbf{Komponen Backend:}
+\begin{itemize}
+    \item \textbf{Layanan REST:} Dibangun menggunakan Node.js (Express) atau Go (Gin), menyediakan endpoint terpisah untuk entitas Mahasiswa, Dosen, Mata Kuliah, dan Jadwal.
+    \item \textbf{Layanan GraphQL:} Dibangun menggunakan teknologi setara (misal Apollo Server), menyediakan satu endpoint /graphql dengan resolver yang memetakan ke struktur data yang sama.
+    \item \textbf{Database:} Menggunakan PostgreSQL atau MongoDB yang sama persis untuk kedua layanan guna mengeliminasi bias pada lapisan data.
+    \item \textbf{Fairness Mechanism:} Kedua layanan akan dilengkapi dengan mock middleware yang menyuntikkan latensi sintetis (misal: 10ms) pada setiap request untuk mensimulasikan proses otentikasi/otorisasi (JWT validation) tanpa melakukan komputasi kriptografi berat yang tidak relevan dengan tujuan penelitian.
+\end{itemize}
+
+\subsection{Metode Pengumpulan Data}
+Data penelitian ini termasuk dalam kategori Data Primer Kuantitatif yang diperoleh melalui eksperimen terkontrol (benchmarking).
+
+\textbf{Instrumen Pengujian:} Menggunakan tools uji beban modern seperti k6 atau JMeter. Alat ini akan bertindak sebagai klien yang mengirimkan ribuan request ke sistem.
+
+\textbf{Skenario Pengujian:}
+\begin{enumerate}
+    \item \textbf{Skenario A (Single Resource):} Mengambil data profil satu mahasiswa. (Menguji overhead dasar protokol).
+    \item \textbf{Skenario B (Nested Resource/Complex Query):} Mengambil data jadwal kuliah seorang mahasiswa beserta detail mata kuliah dan nama dosen pengampunya. (Menguji kemampuan fetching data relasional).
+    \item \textbf{Skenario C (High Concurrency/Stress Test):} Mengirimkan beban tinggi (misal: 1000 virtual users bersamaan) untuk melihat titik jenuh (breaking point) dan perilaku load balancer.
+\end{enumerate}
+
+\textbf{Metrik yang Diukur:}
+\begin{itemize}
+    \item \textbf{Response Time / Latency (ms):} Rata-rata, P95, dan P99.
+    \item \textbf{Throughput (Requests per Second / RPS).}
+    \item \textbf{Payload Size (Kilobytes):} Ukuran data yang dikirim melalui jaringan.
+    \item \textbf{Resource Utilization:} Penggunaan CPU dan Memori pada kontainer (dipantau menggunakan metrics-server Kubernetes atau Prometheus).
+\end{itemize}
+
+\subsection{Metode Pengujian dan Evaluasi (Verifikasi \& Validasi)}
+Untuk memastikan hasil penelitian valid dan reliabel, rencana V\&V berikut akan diterapkan:
+
+\textbf{Verifikasi Fungsional:} Sebelum uji beban, dilakukan Unit Testing dan Integration Testing sederhana untuk memastikan kedua API (REST dan GraphQL) mengembalikan data yang benar dan identik secara semantik untuk input yang sama.
+
+\textbf{Validasi Lingkungan:} Memastikan kondisi cluster Kubernetes "bersih" dan stabil sebelum setiap pengambilan data. Menggunakan teknik warm-up runs sebelum pencatatan data aktual untuk menghindari bias akibat cold start pada aplikasi (khususnya yang berbasis JIT seperti Node.js atau Java).
+
+\textbf{Analisis Statistik:} Data hasil eksperimen tidak hanya dilihat rata-ratanya, tetapi juga dianalisis standar deviasinya untuk melihat konsistensi performa. Uji hipotesis (seperti T-Test) akan digunakan jika diperlukan untuk menentukan apakah perbedaan performa yang diamati signifikan secara statistik.
 
 \newpage
 
